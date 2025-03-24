@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-        stage('checkout') {
+        stage('checlout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Mahi-tes/Boardgame.git'
             }
@@ -94,9 +94,12 @@ pipeline {
             }
         }
         
+       
+    }
+    
     post {
-        always {
-           script {
+    always {
+        script {
             def jobName = env.JOB_NAME
             def buildNumber = env.BUILD_NUMBER
             def pipelineStatus = currentBuild.result ?: 'UNKNOWN'
@@ -120,15 +123,13 @@ pipeline {
                 subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus.toUpperCase()}",
                 body: body,
                 to: 'devopstrainingpms@gmail.com',
-                from: 'jenkins@devopsshack.com',
-                replyTo: 'jenkins@devopsshack.com',
+                from: 'jenkins@devops.com',
+                replyTo: 'jenkins@devops.com',
                 mimeType: 'text/html',
                
             )
-            }
-            
         }
     }
+}
 
-    }
 }
